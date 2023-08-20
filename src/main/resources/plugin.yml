@@ -1,0 +1,4 @@
+name: ChatColor
+version: '${version}'
+main: io.github.elihuso.chatcolor.ChatColor
+api-version: '1.16'
