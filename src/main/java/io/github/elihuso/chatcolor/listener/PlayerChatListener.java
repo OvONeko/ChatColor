@@ -25,22 +25,16 @@ public class PlayerChatListener implements Listener {
                     charmap[i] = '§';
                 }
                 else {
-                    int j;
-                    for (j = i; j < charmap.length - 1; ++j) {
+                    for (int j = i; j < charmap.length - 1; ++j) {
                         charmap[j] = charmap[j + 1];
-                        if (charmap[j + 1] == '\0')
-                            break;
                     }
                     i += 1;
                     length -= 1;
-                    charmap[j] = '\0';
                 }
             }
         }
         char[] out = new char[length];
-        for (int i = 0; i < length; ++i) {
-            out[i] = charmap[i];
-        }
+        System.arraycopy(charmap, 0, out, 0, length);
         event.setMessage(new String(out));
     }
 }
