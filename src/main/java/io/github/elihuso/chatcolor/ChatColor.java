@@ -1,5 +1,6 @@
 package io.github.elihuso.chatcolor;
 
+import io.github.elihuso.chatcolor.config.ConfigManager;
 import io.github.elihuso.chatcolor.listener.PlayerChatListener;
 import io.github.elihuso.chatcolor.utils.ColorHandleUtils;
 import org.bukkit.Bukkit;
@@ -14,11 +15,12 @@ import org.checkerframework.checker.nullness.qual.*;
 import java.util.ArrayList;
 
 public final class ChatColor extends JavaPlugin {
+    private final ConfigManager configManager = new ConfigManager(this);
 
     @Override
     public void onEnable() {
         // Plugin startup logic
-        Bukkit.getPluginManager().registerEvents(new PlayerChatListener(this), this);
+        if (configManager.Enabled()) Bukkit.getPluginManager().registerEvents(new PlayerChatListener(this), this);
     }
 
     @Override
@@ -33,6 +35,10 @@ public final class ChatColor extends JavaPlugin {
             return false;
         }
         Player player = (Player) sender;
+        if (!configManager.AllowCommandRename()) {
+            player.sendMessage(org.bukkit.ChatColor.GREEN + "this command was disabled globally");
+            return false;
+        }
         if (command.getLabel().equalsIgnoreCase("rename")) {
             if (args.length == 0) {
                 player.sendMessage(org.bukkit.ChatColor.RED + "Please input new name!");
