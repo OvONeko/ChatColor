@@ -2,3 +2,20 @@ name: ChatColor
 version: '${version}'
 main: io.github.elihuso.chatcolor.ChatColor
 api-version: '1.16'
+
+commands:
+  rename:
+    permission: chatcolor.rename
+  description:
+    permission: chatcolor.description
+    aliases: [lore]
+  addlore:
+    permission: chatcolor.addlore
+
+permissions:
+  chatcolor.rename:
+    default: true
+  chatcolor.description:
+    default: true
+  charcolor.addlore:
+    default: true
